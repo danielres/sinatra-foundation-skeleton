@@ -1,8 +1,3 @@
-require "rubygems"
-require "bundler/setup"
-require "sinatra/base"
-require "zurb-foundation"
-
 class App < Sinatra::Base
   configure :production, :development do
     enable :logging
@@ -22,11 +17,12 @@ class App < Sinatra::Base
   end
 
   get "/" do
-    erb :index
+    haml :index
   end
 
   get "/stylesheets/*.css" do |path|
     content_type "text/css", charset: "utf-8"
+    #response['Expires'] = (Time.now + 60*60*24*356*3).httpdate
     scss :"scss/#{path}"
   end
 end
