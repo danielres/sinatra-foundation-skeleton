@@ -16,6 +16,16 @@ class App < Sinatra::Base
     set :scss, Compass.sass_engine_options
   end
 
+  #get '/' do
+  #  stream do |out|
+  #    out << "It's gonna be legen -\n"
+  #    sleep 0.5
+  #    out << " (wait for it) \n"
+  #    sleep 1
+  #    out << "- dary!\n"
+  #  end
+  #end
+
   get "/" do
     haml :index
   end
@@ -25,5 +35,10 @@ class App < Sinatra::Base
     #response['Expires'] = (Time.now + 60*60*24*356*3).httpdate
     scss :"scss/#{path}"
   end
+
+  not_found do
+    redirect('/404.html')
+  end
+
 end
 
